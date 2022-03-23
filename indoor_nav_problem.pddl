@@ -42,20 +42,15 @@
   (connected room2 room4)
   (connected room4 room2)
 
-  (connected corridor1 elevator)
-  (connected elevator corridor1)
+  (connected corridor1 elevator1)
+  (connected elevator1 corridor1)
 
-  ;; second floor
-  (connected elevator corridor2)
-  (connected corridor2 elevator)
-  (elevatorAt elevator corridor2)
+  (connected elevator1 corridor2)
+  (connected corridor2 elevator1)
+  (elevatorIn elevator1 corridor2)
   
-
   ;; 2nd floor
   ;; connections with corridor2
-  connected(elevator1 corridor2)
-  connected(corridor2 elevator1)
-
   connected(corridor2 door3)
   connected(door3 corridor2)
 
