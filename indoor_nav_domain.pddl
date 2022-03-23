@@ -1,26 +1,150 @@
 (define (domain indoor-nav-strips-typed)
-(:requirements :strips :typing) ;; more to be added
+(:requirements :strips :typing)
+
+;;TYPES
 
 (:types
-  ;; types to be used
+  room corridor zone - location
+  location elevator door - connectable
+  object
+  robot
 )
+
+;;PREDICATES
 
 (:predicates 
-  ;; for example: (robotAt ?r - robot ?p - planet)
+  (robotAt ?r - robot ?l - location)
+  (objectAt ?o - object ?l - location)
+  (connected ?c1 ?c2 - connectable)
+  (closed ?d - door)
+  (opened ?d - door)
+  (objectIn ?o - object ?r - robot)
+  (elevatorIn ?e - elevator ?c - corridor)
 )
 
-(:action example action
-  :parameters (?r - robot  ?s - starship ?p - planet) ;; args
+;;ACTIONS
+
+(:action example moveToLocation
+  :parameters (?r - robot ?from ?to - location)
   :precondition 
     (and 
-      (robotAt ?r ?p)
-      (starshipAt ?s ?p)
+      (robotAt ?r ?from)
+      (connected ?from ?to)
     )
   :effect 
     (and 
-      (robotIn ?r ?s)
-      (not (robotAt ?r ?p)))
+      (not (robotAt ?r ?from))
+      (robotAt ?r ?to)
     )
+)
+
+(:action example moveThroughDoor
+  :parameters (?r - robot ?d - door ?from ?to - location)
+  :precondition 
+    (and 
+      (opened ?d)
+      (robotAt ?r ?from)
+      (connected ?from ?d)
+      (connected ?to ?d)
+    )
+  :effect 
+    (and 
+      (not (robotAt ?r ?from))
+      (robotAt ?r ?to)
+    )
+)
+
+(:action example moveThroughElevator
+  :parameters (?r - robot ?e - elevator ?from ?to - corridor)
+  :precondition 
+    (and 
+      (elevatorIn ?e ?from)
+      (robotAt ?r ?from)
+      (connected ?from ?e)
+      (connected ?to ?e)
+    )
+  :effect 
+    (and 
+      (not (elevatorIn ?e ?from))
+      (elevatorIn ?e ?to)
+      (not (robotAt ?r ?from))
+      (robotAt ?r ?to)
+    )
+)
+
+(:action example callElevator
+  :parameters (?r - robot ?e - elevator ?from ?to - corridor)
+  :precondition 
+    (and 
+      (elevatorIn ?e ?from)
+      (robotAt ?r ?to)
+      (connected ?from ?e)
+      (connected ?to ?e)
+    )
+  :effect 
+    (and 
+      (not (elevatorIn ?e ?from))
+      (elevatorIn ?e ?to)
+    )
+)
+
+(:action example pick
+  :parameters (?r - robot ?o - object ?l - location)
+  :precondition 
+    (and 
+      (robotAt ?r ?l)
+      (objectAt ?o ?l)
+    )
+  :effect 
+    (and 
+      (not (objectAt ?o ?l))
+      (objectIn ?o ?r)
+    )
+)
+
+(:action example drop
+  :parameters (?r - robot ?o - object ?l - location)
+  :precondition 
+    (and 
+      (robotAt ?r ?l)
+      (objectIn ?o ?r)
+    )
+  :effect 
+    (and 
+      (not (objectIn ?o ?r))
+      (objectAt ?o ?l)
+    )
+)
+
+(:action example open
+  :parameters (?r - robot ?d - door ?from - location)
+  :precondition 
+    (and 
+      (robotAt ?r ?from)
+      (connected ?from ?d)
+      (closed ?d)
+    )
+  :effect 
+    (and 
+      (not (closed ?d)) ;;closen't
+      (opened ?d)
+    )
+)
+
+(:action example closed
+  :parameters (?r - robot ?d - door ?from - location)
+  :precondition 
+    (and 
+      (robotAt ?r ?from)
+      (connected ?from ?d)
+      (opened ?d)
+    )
+  :effect 
+    (and 
+      (not (opened ?d)) ;;open't
+      (closed ?d)
+    )
+)
 
 
 )
