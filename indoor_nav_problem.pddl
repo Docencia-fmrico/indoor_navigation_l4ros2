@@ -1,4 +1,4 @@
-(define (problem indoor_nav_problem)
+(define (problem indoor_nav_problem0)
 ;; indoor_nav_domain.pddl
 (:domain indoor-nav-strips-typed)
 (:objects 
@@ -23,7 +23,7 @@
   (connected door2 room1)
   (connected door2 room3)
   (connected room3 door2)
-  (robotAt pepo room3)
+  (robotAt pipo room3)
 
   (connected room1 door1)
   (connected door1 room1)
@@ -51,44 +51,43 @@
   
   ;; 2nd floor
   ;; connections with corridor2
-  connected(corridor2 door3)
-  connected(door3 corridor2)
-
-  connected(corridor2 door4)
-  connected(door4 corridor2)
-
-  connected(corridor2 corridor3)
-  connected(corridor3 corridor2)
+  (connected corridor2 door3)
+  (connected door3 corridor2)
+  (connected corridor2 door4)
+  (connected door4 corridor2)
+  (connected corridor2 corridor3)
+  (connected corridor3 corridor2)
 
   ;; connections with corridor 3
-  connected(corridor3 door5)
-  connected(door5 corridor3)
-
-  connected(corridor3 door6)
-  connected(door6 corridor3)
-
-  connected(corridor3 door7)
-  connected(door7 corridor3)
+  (connected corridor3 door5)
+  (connected door5 corridor3)
+  (connected corridor3 door6)
+  (connected door6 corridor3)
+  (connected corridor3 door7)
+  (connected door7 corridor3)
 
   ;; connections of the rooms with the doors of the 2nd floor
 
-  connected(room6 door3)
-  connected(door3 room6)
+  (connected room6 door3)
+  (connected door3 room6)
+  (connected room5 door4)
+  (connected door4 room5)
+  (connected room7 door5)
+  (connected door5 room7)
 
-  connected(room5 door4)
-  connected(door4 romm5)
+  (connected room9 door6)
+  (connected door6 room9)
+  (connected room8 door7)
+  (connected door7 room8)
 
-  connected(room7 door5)
-  connected(door5 room7)
-
-  connected(room9 door6)
-  connected(door6 room9)
-
-  connected(room8 door7)
-  connected(door7 room8)
-
-
-
+  ;; close all the doors
+  (closed door1)
+  (closed door2)
+  (closed door3)
+  (closed door4)
+  (closed door5)
+  (closed door6)
+  (closed door7)
 )
 
 (:goal  ;; to be achieved
@@ -97,17 +96,18 @@
   ;; and it will leave ALL the doors closed
   (and
 
-    (forall (?d - door) 
-        (closed ?d)
-    )
+    ;; (forall (?d - door) 
+    ;;     (closed ?d)
+    ;; )
 
-    objectAt(object1 room9)
+    (objectAt object1 room9)
 
-    robotAt(pipo room8)
+    (robotAt pipo room8)
 
 
 
   )
   
 
+)
 )

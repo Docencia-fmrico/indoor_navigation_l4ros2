@@ -24,7 +24,7 @@
 
 ;;ACTIONS
 
-(:action example moveToLocation
+(:action moveToLocation
   :parameters (?r - robot ?from ?to - location)
   :precondition 
     (and 
@@ -38,7 +38,7 @@
     )
 )
 
-(:action example moveThroughDoor
+(:action moveThroughDoor
   :parameters (?r - robot ?d - door ?from ?to - location)
   :precondition 
     (and 
@@ -54,7 +54,7 @@
     )
 )
 
-(:action example moveThroughElevator
+(:action moveThroughElevator
   :parameters (?r - robot ?e - elevator ?from ?to - corridor)
   :precondition 
     (and 
@@ -72,7 +72,7 @@
     )
 )
 
-(:action example callElevator
+(:action callElevator
   :parameters (?r - robot ?e - elevator ?from ?to - corridor)
   :precondition 
     (and 
@@ -88,7 +88,7 @@
     )
 )
 
-(:action example pick
+(:action pick
   :parameters (?r - robot ?o - object ?l - location)
   :precondition 
     (and 
@@ -102,7 +102,7 @@
     )
 )
 
-(:action example drop
+(:action drop
   :parameters (?r - robot ?o - object ?l - location)
   :precondition 
     (and 
@@ -116,7 +116,7 @@
     )
 )
 
-(:action example open
+(:action open
   :parameters (?r - robot ?d - door ?from - location)
   :precondition 
     (and 
@@ -131,7 +131,7 @@
     )
 )
 
-(:action example closed
+(:action closed
   :parameters (?r - robot ?d - door ?from - location)
   :precondition 
     (and 
