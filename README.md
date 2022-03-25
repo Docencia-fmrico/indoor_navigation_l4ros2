@@ -28,3 +28,12 @@ zona concreta
 
 ![indoor_nav_example_img](https://user-images.githubusercontent.com/22964725/159479039-f37a2b22-a483-4cb9-bd47-13fb38839c45.png)
 
+# Different planners solutions
+
+## Popf solution:
+
+![popf_solution](./popf_solution.png)
+
+## Marvin2 solution:
+
+![marvin2_solution](./marvin2_solution.png)
